@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/util.css">
+  <link rel="stylesheet" href="css/toast.css">
+  <link rel="stylesheet" href="css/in.css">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="stylesheet" href="css/style1.css">
+  <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thread Haven</title>
+  <script src="https://kit.fontawesome.com/24c494a6b6.js" crossorigin="anonymous"></script>
+  <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+
+  <header>
+    <div id="logo">
+      <a href="/"><img id="imgp" src="images/logo.png"></a>
+    </div>
+    <ul id="nav_bar1">
+      <li id="megamenu_container"><a href="men">men</a></li>
+      <li><a href="women">women</a></li>
+      <li id="studio"><a href="home">home & living</a><span>new</span></li>
+    </ul>
+    <div class="ser">
+      <input class="searc" type="text" id="myTextBox" placeholder="Search">
+    </div>
+    <div id="right_icon1">
+      <div>
+        <a href="wish" class="colorchange">
+        <i class="fa-regular fa-heart"></i>
+        <span>wishlist</span>
+        </a>
+      </div>
+    </div>
+    <div id="right_icon1">
+      <div id="reggDropdown1">
+        <div id="drop1">
+            <span>Welcome</span><a class="dropList"><%= usernum1 %></a>
+            <a href="/" class="ejs dropList" onclick="updateUsernum1();">Logout</a>
+        </div>
+        <i class="fa-regular fa-user"></i>
+        <span>profile</span>
+      </div>
+    </div>
+    <div id="right_icon1">
+      <div>
+        <a class="colorchange" href="bag">
+          <i class="fa-solid fa-bag-shopping"></i>
+          <span>bag</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+
+
+
+
+
+  <div id="wrapper">
+
+    <div id="container"></div>
+  </div>
+
+  
+  <div id="snackbar1">ADDED TO BAG</div>
+  <div id="snackbar2">ADDED TO WISHLIST</div>
+
+
+  <footer class="footer2">
+    <ul class="list1">
+      <li class="top1 bold">ONLINE SHOPPING</li>
+      <li class="bot1"><a class="colorchange" href="men">Men</a></li>
+      <li class="bot1"><a class="colorchange" href="women">Women</a></li>
+      <li class="bot1"><a class="colorchange" href="home">Home & Living</a></li>
+    </ul>
+
+    <ul class="list2">
+      <li class="top2 bold">CUSTOMER POLICIES</li>
+      <li class="bot2"><a href="contact" class="colorchange">Contact US</a></li>
+      <li class="bot2"><a href="faq" class="colorchange">FAQ</a></li>
+      <li class="bot2"><a href="about" class="colorchange">About Us</a></li>
+    </ul>
+
+    <li class="top3 bold uppercase">Experience Thread Haven app on mobile</li>
+
+    <img class="pic1" src="images/play-store.png" alt="">
+    <img class="pic2" src="images/app-store.png" alt="">
+
+    <div class="new_footer">
+      <img src="https://bit.ly/3JPiL47" alt="original">
+      <p> <span>100% ORIGINAL</span> guarantee for all products at thread_haven.com</p>
+    </div>
+    <div class="new_footer">
+      <img src="https://bit.ly/3uBalH4" alt="return_policy">
+      <p><span>Return within 30days</span> of receiving your order</p>
+    </div>
+
+
+
+
+  </footer>
+
+
+
+  <script src="javascript/wish.js"></script>
+  <script src="javascript/search.js"></script>
+  
+  <script>
+    function updateUsernum1() {
+      const newusernum1 = 1; // Set the new value of usernum1
+      fetch('/updateUsernum1', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ usernum1: newusernum1 })
+      })
+      .then(response => {
+        if (response.ok) {
+          // If the request was successful, update usernum1 on the client-side
+          const usernum1Element = document.querySelector('#usernum1');
+          usernum1Element.textContent = newusernum1;
+        }
+      });
+    }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/faq.css">
+    <link rel="stylesheet" href="css/maincon.css">
+    <link rel="stylesheet" href="css/util.css">
+    <script src="https://kit.fontawesome.com/24c494a6b6.js" crossorigin="anonymous"></script>
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <div id="logo">
+          <a href="/"><img id="imgp" src="images/logo.png"></a>
+        </div>
+        <ul id="nav_bar">
+          <li id="megamenu_container"><a href="men">men</a></li>
+          <li><a href="women">women</a></li>
+          <li id="studio"><a href="home">home & living</a><span>new</span></li>
+        </ul>
+        <div class="ser">
+          <input class="searc" type="text" id="myTextBox" placeholder="Search">
+        </div>
+        <div id="right_icon">
+          <div>
+            <a href="wish" class="colorchange">
+            <i class="fa-regular fa-heart"></i>
+            <span>wishlist</span>
+            </a>
+          </div>
+        </div>
+        <div id="right_icon">
+          <div id="reggDropdown">
+            <div id="drop">
+                <span>Welcome</span><a class="dropList"><%= usernum1 %></a>
+                <a href="/" class="ejs dropList" onclick="updateUsernum1();">Logout</a>
+            </div>
+            <i class="fa-regular fa-user"></i>
+            <span>profile</span>
+          </div>
+        </div>
+        <div id="right_icon">
+          <div>
+            <a class="colorchange" href="bag">
+              <i class="fa-solid fa-bag-shopping"></i>
+              <span>bag</span>
+            </a>
+          </div>
+        </div>
+      </header>
+      <div id="body">
+	<div class="head">
+		<h1>Frequently Asked Questions</h1>
+    </div >
+	
+	<main>
+		<section>
+			<h2>Orders and Shipping</h2>
+			
+			<dl>
+				<dt>How long will it take to receive my order?</dt>
+				<dd>Thank you for your interest in our fashion e-commerce website! The delivery time for your order depends on the shipping option you choose and your location. Typically, our standard shipping takes between 5 to 7 business days within India, while express shipping takes between 1 to 3 business days. Please note that these delivery times are estimates and may vary based on factors such as weather conditions and shipping carrier delays.</dd>
+				
+				<dt>What shipping options do you offer?</dt>
+				<dd>We offer two shipping options for our customers in India - standard shipping and express shipping. Our standard shipping is free on all orders, and the estimated delivery time is between 5 to 7 business days. If you need your order sooner, we also offer express shipping for an additional fee. Our express shipping takes between 1 to 3 business days.</dd>
+				
+				<dt>Do you ship internationally?</dt>
+				<dd>Yes, we do ship internationally! We offer international shipping to over 100 countries worldwide. However, please note that international shipping may take longer than domestic shipping due to customs clearance processes in different countries. Additionally, please be aware that international orders may be subject to import taxes and duties, which are the responsibility of the customer. We recommend checking with your local customs office for more information on any potential fees.</dd>
+			</dl>
+		</section>
+		
+		<section>
+			<h2>Returns and Exchanges</h2>
+			
+			<dl>
+				<dt>What is your return policy?</dt>
+				<dd>At our fashion e-commerce website, we want you to be completely satisfied with your purchase. We offer a hassle-free return policy within 30 days of the delivery date for items that are in their original condition with all tags attached. Please note that all final sale items are not eligible for returns. If you have any issues with your order, please contact our customer service team for assistance.</dd>
+				
+				<dt>How do I initiate a return?</dt>
+				<dd>To initiate a return, please contact our customer service team with your order number and reason for the return. Our team will provide you with a return authorization and instructions on how to send the item(s) back. Please note that the customer is responsible for the return shipping cost, and we recommend using a trackable shipping method. Once we receive the returned item(s), we will process the refund within 5-7 business days.</dd>
+				
+				<dt>Do you offer exchanges?</dt>
+				<dd>At this time, we do not offer exchanges. If you would like to exchange an item, please initiate a return for the unwanted item and place a new order for the item you would like instead. If you have any questions about sizing or product details, please contact our customer service team for assistance before placing your order.</dd>
+			</dl>
+		</section>
+		
+		<section>
+			<h2>Payments and Discounts</h2>
+			
+			<dl>
+				<dt>What payment methods do you accept?</dt>
+				<dd>We accept several payment methods for your convenience. You can pay for your order using major credit cards such as Visa, Mastercard, American Express, and Discover. We also accept payments through PayPal and Apple Pay for customers who prefer those options.</dd>
+				
+				<dt>Do you offer any discounts or promotions?</dt>
+				<dd>Yes, we do offer discounts and promotions from time to time. To stay up to date on our current promotions, please sign up for our email newsletter or follow us on social media. Additionally, we occasionally offer special discounts to our loyal customers and subscribers.</dd>
+				
+				<dt>How do I use a coupon code?</dt>
+				<dd>To use a coupon code, simply enter the code at checkout in the designated field. The discount will automatically be applied to your order subtotal. Please note that only one coupon code can be used per order, and some promotions may have restrictions or exclusions. If you have any issues using a coupon code, please contact our customer service team for assistance.</dd>
+			</dl>
+		</section>
+	</main>
+    </div>
+    <script>
+        function updateUsernum1() {
+          const newusernum1 = 1; // Set the new value of usernum1
+          fetch('/updateUsernum1', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ usernum1: newusernum1 })
+          })
+          .then(response => {
+            if (response.ok) {
+              // If the request was successful, update usernum1 on the client-side
+              const usernum1Element = document.querySelector('#usernum1');
+              usernum1Element.textContent = newusernum1;
+            }
+          });
+        }
+        </script>
+    <script src="javascript/search.js"></script>
+</body>
+</html>
