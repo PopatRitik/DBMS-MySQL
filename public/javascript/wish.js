@@ -64,7 +64,6 @@ function displayPage(productData) {
 
         atw.addEventListener("click", function () {
             removefromwishlist(elem)
-            atw.style.color = "green"
         })
 
 

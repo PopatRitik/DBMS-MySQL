@@ -135,6 +135,41 @@ app.get('/bagin', (req, res) => {
     });
 });
 
+app.get('/total', (req, res) => {
+    let table = "a" + usernum;
+    connection.query(`SELECT SUM(rs) FROM ${table}`, (error, results) => {
+        if (error) {
+            console.error(error);
+            res.status(500).send('Internal Server Error');
+        } else {
+            console.log(JSON.stringify(results));
+            res.send(JSON.stringify(results));
+        }
+    });
+});
+
+app.get('/order', (req, res) => {
+    let table = "a" + usernum;
+    console.log("yoyo");
+    connection.query(`DELETE FROM ${table}`, (error, results) => {
+        if (error) {
+            console.error(error);
+            res.status(500).send('Internal Server Error');
+        } else {
+            res.render("checkout", { usernum1: usernum });
+            console.log("yo");
+        }
+    });
+});
+
+app.get("/checkout", function (req, res) {
+    if (usernum1 === 1)
+        res.sendFile(__dirname + "/html/index.html");
+    else {
+        res.render("checkout", { usernum1: usernum });
+    }
+});
+
 app.get('/wishin', (req, res) => {
     let table = "w" + usernum;
     connection.query(`SELECT * FROM ${table}`, (error, results) => {

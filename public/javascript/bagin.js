@@ -1,20 +1,41 @@
 var productData = [];
 window.addEventListener('load', function () {
     var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
+    xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             var data = JSON.parse(this.responseText);
             productData = Array.from(data);
-            displayPage(productData); 
+            displayPage(productData);
         }
     };
-    
+
     xhttp.open("GET", "http://localhost:3000/bagin", true);
     xhttp.send();
-    
+
+    xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            var data = JSON.parse(this.responseText);
+            check(data);
+        }
+    };
+
+    xhttp.open("GET", "http://localhost:3000/total", true);
+    xhttp.send();
+
+
 });
 
-
+function check(total) {
+    document.getElementById("check").innerHTML = "Total Amount: ";
+    var totalElement = document.createElement("div");
+    var sum = total[0]["SUM(rs)"];
+    if(sum==null){
+        sum=0;
+    }
+    totalElement.textContent = sum;
+    document.getElementById("check").appendChild(totalElement);
+}
 
 function displayPage(productData) {
 
@@ -64,7 +85,6 @@ function displayPage(productData) {
 
         atw.addEventListener("click", function () {
             addToWishlist(elem)
-            atw.style.color = "green"
             alert("ADDED TO WISHLIST");
         })
 
@@ -81,7 +101,7 @@ function displayPage(productData) {
             addToBag(elem)
         })
 
-        contentBox.append(brand, productname, mix,  atc)
+        contentBox.append(brand, productname, mix, atc)
 
         box.append(img, contentBox)
 
@@ -96,31 +116,34 @@ function displayPage(productData) {
 function addToBag(element) {
     // var f;
     var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-        var data = (this.responseText);
-        // f = data
-        if(data == "1"){
-            
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", "/removefrombag");
-            xhr.setRequestHeader("Content-type", "application/json");
-            xhr.onload = function () {
-                // do something to response
-                console.log(element);
-            };
-            xhr.send(JSON.stringify(element));
-            window.location.href = "bag"
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            var data = (this.responseText);
+            // f = data
+            if (data == "1") {
+
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "/removefrombag");
+                xhr.setRequestHeader("Content-type", "application/json");
+                xhr.onload = function () {
+                    // do something to response
+                };
+                xhr.send(JSON.stringify(element));
+                window.location.href = "bag"
+            }
+            else {
+                window.location.href = "login1"
+            }
         }
-        else{
-            window.location.href = "login1"
-        }
-    }
     };
-    
+
     xhttp.open("GET", "http://localhost:3000/auth", true);
     xhttp.send();
 
-    
+
     // console.log(f);
 }
+
+document.getElementById("check").addEventListener("click",function(){
+    window.open("checkout",'_self');
+})

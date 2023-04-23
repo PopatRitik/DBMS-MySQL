@@ -1,5 +1,5 @@
-function clearForm() {
+
+
+document.getElementById("submitButton").addEventListener("click", function () {
     document.getElementById("myForm").reset();
-}
-  
-document.getElementById("submitButton").addEventListener("click", clearForm);
+});

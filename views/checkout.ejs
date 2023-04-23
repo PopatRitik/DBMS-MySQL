@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/maincon.css">
+    <link rel="stylesheet" href="css/util.css">
+    <link rel="stylesheet" href="css/toast.css">
+    <script src="https://kit.fontawesome.com/24c494a6b6.js" crossorigin="anonymous"></script>
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <div id="logo">
+          <a href="/"><img id="imgp" src="images/logo.png"></a>
+        </div>
+        <ul id="nav_bar">
+          <li id="megamenu_container"><a class="con" href="men">men</a></li>
+          <li><a class="con" href="women">women</a></li>
+          <li class="con" id="studio"><a href="home">home & living</a><span>new</span></li>
+        </ul>
+        <div class="ser">
+          <input class="searc" type="text" id="myTextBox" placeholder="Search">
+        </div>
+        <div id="right_icon">
+          <div>
+            <a href="wish" class="colorchange">
+            <i class="fa-regular fa-heart"></i>
+            <span>wishlist</span>
+            </a>
+          </div>
+        </div>
+        <div id="right_icon">
+          <div id="reggDropdown">
+            <div id="drop">
+                <span>Welcome</span><a class="dropList"><%= usernum1 %></a>
+                <a href="/" class="ejs dropList" onclick="updateUsernum1();">Logout</a>
+            </div>
+            <i class="fa-regular fa-user"></i>
+            <span>profile</span>
+          </div>
+        </div>
+        <div id="right_icon">
+          <div>
+            <a class="colorchange" href="bag">
+              <i class="fa-solid fa-bag-shopping"></i>
+              <span>bag</span>
+            </a>
+          </div>
+        </div>
+      </header>
+
+	<div class="container11">
+		<h1>Submit Your Details</h1>
+		<p>Feel free to reach out to us with any questions or feedback.</p>
+		<form action="order" method="get" autocomplete="off" id="myForm">
+			<label for="name">Name:</label>
+			<input class="text1" type="text" id="name" name="name" required>
+			<label for="email">Email:</label>
+			<input class="email1" type="email" id="email" name="email" required>
+			<label for="message">Address:</label>
+			<textarea class="textarea1" id="message" name="message" required></textarea>
+			<input type="submit" value="Order">
+		</form>
+	</div>
+
+  
+  <div id="snackbar1">ORDERED</div>
+
+
+    
+    <script>
+        function updateUsernum1() {
+          const newusernum1 = 1; // Set the new value of usernum1
+          fetch('/updateUsernum1', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ usernum1: newusernum1 })
+          })
+          .then(response => {
+            if (response.ok) {
+              // If the request was successful, update usernum1 on the client-side
+              const usernum1Element = document.querySelector('#usernum1');
+              usernum1Element.textContent = newusernum1;
+            }
+          });
+        }
+        </script>
+        <script src="javascript/search.js"></script>
+    <script src="javascript/contact.js"></script>
+</body>
+</html>
