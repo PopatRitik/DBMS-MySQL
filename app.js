@@ -9,6 +9,8 @@ const passport = require("passport");
 
 var usernum1 = 1;
 var usernum = 0;
+var username = "0";
+var usernmae1 = "1";
 var tablename;
 var tablename1;
 
@@ -23,7 +25,7 @@ app.get("/", function (req, res) {
     if (usernum1 === 1)
         res.sendFile(__dirname + "/html/index.html");
     else {
-        res.render("index", { usernum1: usernum });
+        res.render("index", { username1: username });
     }
 });
 
@@ -31,7 +33,7 @@ app.get("/men", function (req, res) {
     if (usernum1 === 1)
         res.sendFile(__dirname + "/html/men.html");
     else {
-        res.render("men", { usernum1: usernum });
+        res.render("men", { username1: username });
     }
 });
 
@@ -39,7 +41,7 @@ app.get("/menin", function (req, res) {
     if (usernum1 === 1)
         res.sendFile(__dirname + "/html/menin.html");
     else {
-        res.render("menin", { usernum1: usernum });
+        res.render("menin", { username1: username });
     }
 });
 
@@ -47,7 +49,7 @@ app.get("/home", function (req, res) {
     if (usernum1 === 1)
         res.sendFile(__dirname + "/html/home.html");
     else {
-        res.render("home", { usernum1: usernum });
+        res.render("home", { username1: username });
     }
 });
 
@@ -55,7 +57,7 @@ app.get("/homein", function (req, res) {
     if (usernum1 === 1)
         res.sendFile(__dirname + "/html/homein.html");
     else {
-        res.render("homein", { usernum1: usernum });
+        res.render("homein", { username1: username });
     }
 });
 
@@ -63,7 +65,7 @@ app.get("/women", function (req, res) {
     if (usernum1 === 1)
         res.sendFile(__dirname + "/html/women.html");
     else {
-        res.render("women", { usernum1: usernum });
+        res.render("women", { username1: username });
     }
 });
 
@@ -71,7 +73,7 @@ app.get("/womenin", function (req, res) {
     if (usernum1 === 1)
         res.sendFile(__dirname + "/html/womenin.html");
     else {
-        res.render("womenin", { usernum1: usernum });
+        res.render("womenin", { username1: username });
     }
 });
 
@@ -79,7 +81,7 @@ app.get("/null", function (req, res) {
     if (usernum1 === 1)
         res.sendFile(__dirname + "/html/null.html");
     else {
-        res.render("null", { usernum1: usernum });
+        res.render("null", { username1: username });
     }
 });
 
@@ -87,7 +89,7 @@ app.get("/bag", function (req, res) {
     if (usernum1 === 1)
         res.sendFile(__dirname + "/html/login1.html");
     else {
-        res.render("bag", { usernum1: usernum });
+        res.render("bag", { username1: username });
     }
 });
 
@@ -95,7 +97,7 @@ app.get("/wish", function (req, res) {
     if (usernum1 === 1)
         res.sendFile(__dirname + "/html/login1.html");
     else {
-        res.render("wish", { usernum1: usernum });
+        res.render("wish", { username1: username });
     }
 });
 
@@ -103,7 +105,7 @@ app.get("/about", function (req, res) {
     if (usernum1 === 1)
         res.sendFile(__dirname + "/html/about.html");
     else {
-        res.render("about", { usernum1: usernum });
+        res.render("about", { username1: username });
     }
 });
 
@@ -111,7 +113,7 @@ app.get("/faq", function (req, res) {
     if (usernum1 === 1)
         res.sendFile(__dirname + "/html/faq.html");
     else {
-        res.render("faq", { usernum1: usernum });
+        res.render("faq", { username1: username });
     }
 });
 
@@ -119,7 +121,7 @@ app.get("/contact", function (req, res) {
     if (usernum1 === 1)
         res.sendFile(__dirname + "/html/contact.html");
     else {
-        res.render("contact", { usernum1: usernum });
+        res.render("contact", { username1: username });
     }
 });
 
@@ -156,7 +158,7 @@ app.get('/order', (req, res) => {
             console.error(error);
             res.status(500).send('Internal Server Error');
         } else {
-            res.render("checkout", { usernum1: usernum });
+            res.render("checkout", { username1: username });
             console.log("yo");
         }
     });
@@ -164,9 +166,9 @@ app.get('/order', (req, res) => {
 
 app.get("/checkout", function (req, res) {
     if (usernum1 === 1)
-        res.sendFile(__dirname + "/html/index.html");
+        res.sendFile(__dirname + "/html/login1.html");
     else {
-        res.render("checkout", { usernum1: usernum });
+        res.render("checkout", { username1: username });
     }
 });
 
@@ -295,6 +297,7 @@ app.get("/auth", function (req, res) {
 });
 
 app.post("/login1", function (req, res) {
+    username=req.body.name;
     usernum = req.body.num;
     const password = req.body.pwd;
     var pwd = md5(password);
@@ -308,12 +311,14 @@ app.post("/login1", function (req, res) {
             res.status(401).sendFile(__dirname + '/html/signup.html');
         } else {
             usernum1 = usernum;
+            username1=username;
             res.redirect("/");
         }
     });
 })
 
 app.post("/signup", function (req, res) {
+    username=req.body.name;
     usernum = req.body.num;
     const password = req.body.pwd;
     var pwd = md5(password);
@@ -355,12 +360,13 @@ app.post("/signup", function (req, res) {
                     res.sendFile(__dirname + "/html/signup.html");
                 } else {
                     usernum1 = usernum;
+                    usernmae1=username;
                     connection.query(query3, (err, result) => {
                         if (err) {
                             console.error(err);
                             res.sendFile(__dirname + "/html/signup.html");
                         } else {
-                            res.render("index", { usernum1: usernum });
+                            res.render("index", { username1: username });
                         }
                     });
                 }
