@@ -302,7 +302,7 @@ app.post("/login1", function (req, res) {
     const password = req.body.pwd;
     var pwd = md5(password);
 
-    const query = `SELECT * FROM user WHERE num='${usernum}' AND pwd='${pwd}'`;
+    const query = `SELECT * FROM user WHERE (num='${usernum}' AND pwd='${pwd}') AND name='${username}';`;
     connection.query(query, (err, rows) => {
         if (err) {
             console.error(err);
@@ -324,7 +324,7 @@ app.post("/signup", function (req, res) {
     var pwd = md5(password);
     tablename = "a" + usernum;
     tablename1 = "w" + usernum;
-    const query1 = `INSERT INTO user VALUES ('${usernum}','${pwd}')`;
+    const query1 = `INSERT INTO user VALUES ('${username}','${usernum}','${pwd}')`;
     const query2 = `CREATE TABLE ${tablename} (
         img varchar(100),
         brand varchar(100),
